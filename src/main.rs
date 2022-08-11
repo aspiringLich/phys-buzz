@@ -8,8 +8,12 @@ use bevy_prototype_lyon::prelude::*;
 
 mod setup;
 use setup::*;
+
 mod render;
 use render::*;
+
+mod physics;
+use physics::*;
 
 fn main() {
     App::new()
