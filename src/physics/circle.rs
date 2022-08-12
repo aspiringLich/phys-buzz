@@ -1,6 +1,7 @@
 use bevy::prelude::*;
-use physics::PhysicsObject;
+use physics::{Collision, PhysicsInterface, PhysicsObject};
 
+#[derive(Component)]
 pub struct Circle {
     radius: f32,
     mass: f32,
@@ -11,69 +12,18 @@ pub struct Circle {
     mmoi: f32,
 }
 
+impl_physics_interface!(Circle);
+
 impl PhysicsObject for Circle {
     fn calculate_mmoi(&mut self) {
-        todo!()
+        self.mmoi = 0.5 * self.mass() * self.radius.powi(2);
     }
 
     fn bounding_sphere_radius(&self) -> f32 {
+        self.radius
+    }
+
+    fn detect_collision(&self, other: &Self) -> Option<Collision> {
         todo!()
-    }
-
-    fn detect_collision(&self, other: &Self) -> Option<super::object::Collision> {
-        todo!()
-    }
-
-    fn apply_impulse(&mut self, collision: super::object::Collision) {
-        todo!()
-    }
-
-    /* boring funcs replace with macro later? */
-    fn mass(&self) -> f32 {
-        self.mass
-    }
-
-    fn position(&self) -> Vec2 {
-        self.position
-    }
-
-    fn velocity(&self) -> Vec2 {
-        self.velocity
-    }
-
-    fn rotation(&self) -> f32 {
-        self.rotation
-    }
-
-    fn rotational_velocity(&self) -> f32 {
-        self.rotational_velocity
-    }
-
-    fn mmoi(&self) -> f32 {
-        self.mmoi
-    }
-
-    fn mass_mut(&mut self) -> &mut f32 {
-        &mut self.mass
-    }
-
-    fn position_mut(&mut self) -> &mut Vec2 {
-        &mut self.position
-    }
-
-    fn velocity_mut(&mut self) -> &mut Vec2 {
-        &mut self.velocity
-    }
-
-    fn rotation_mut(&mut self) -> &mut f32 {
-        &mut self.rotation
-    }
-
-    fn rotational_velocity_mut(&mut self) -> &mut f32 {
-        &mut self.rotational_velocity
-    }
-
-    fn mmoi_mut(&mut self) -> &mut f32 {
-        &mut self.mmoi
     }
 }

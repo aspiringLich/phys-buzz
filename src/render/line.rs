@@ -11,9 +11,13 @@ lazy_static! {
     };
 }
 
-pub fn rounded_stroke(line_width: f32, color: Color) -> StrokeMode {
+pub fn rounded_stroke_mode(line_width: f32, color: Color) -> StrokeMode {
     StrokeMode {
         options: ROUNDED_STROKE_OPTIONS.with_line_width(line_width),
         color,
     }
+}
+
+pub fn rounded_draw_mode(line_width: f32, color: Color) -> DrawMode {
+    DrawMode::Stroke(rounded_stroke_mode(line_width, color))
 }
